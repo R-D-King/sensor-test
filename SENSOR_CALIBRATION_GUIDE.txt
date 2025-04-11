@@ -1,0 +1,89 @@
+SENSOR CALIBRATION GUIDE
+========================
+
+This file provides instructions on how to adjust your sensor code if you find
+that readings are reversed during testing.
+
+DIGITAL SENSORS
+--------------
+
+1. Rain Sensor (Digital) - rain_sensor.py:
+   If the rain detection is reversed (showing rain when dry or vice versa),
+   change line 23 from:
+       if current_state == 0:
+   to:
+       if current_state == 1:
+
+2. LDR Sensor (Digital) - ldr(dout).py:
+   If light detection is reversed, change lines 21-24 from:
+       if current_state == 0:
+           print("Light level: HIGH")
+       else:
+           print("Light level: LOW")
+   to:
+       if current_state == 1:
+           print("Light level: HIGH")
+       else:
+           print("Light level: LOW")
+
+3. Relay - relay.py:
+   If relay operation is reversed, swap the GPIO.HIGH and GPIO.LOW values:
+       GPIO.output(relay_pin, GPIO.LOW)  # Turn ON
+       GPIO.output(relay_pin, GPIO.HIGH)  # Turn OFF
+
+ANALOG SENSORS
+-------------
+
+1. Rain Sensor (Analog) - rain_sensor_analog.py:
+   If wetness readings are reversed, modify the calculate_wetness_percentage function:
+   
+   From:
+       return ((DRY_VALUE - value) / (DRY_VALUE - WET_VALUE)) * 100
+   
+   To:
+       return ((value - WET_VALUE) / (DRY_VALUE - WET_VALUE)) * 100
+   
+   Also adjust the interpretation thresholds:
+       if wetness > 90:  # Was: if wetness < 10
+           print("Status: DRY - No rain detected")
+       elif wetness > 50:  # Was: elif wetness < 50
+           print("Status: DAMP - Light rain/moisture")
+       else:
+           print("Status: WET - Heavy rain detected")
+
+2. Soil Moisture Sensor - soil_moisture.py:
+   If moisture readings are reversed, modify the calculate_moisture_percentage function:
+   
+   From:
+       return ((DRY_VALUE - value) / (DRY_VALUE - WET_VALUE)) * 100
+   
+   To:
+       return ((value - WET_VALUE) / (DRY_VALUE - WET_VALUE)) * 100
+   
+   Or alternatively, swap the calibration values:
+       DRY_VALUE = 400  # Was: 900
+       WET_VALUE = 900  # Was: 400
+
+3. LDR Sensor (Analog) - ldr(aout).py:
+   If light percentage readings are reversed, modify the convert_to_percent function:
+   
+   From:
+       percent = ((value - min_val) / (max_val - min_val)) * 100
+   
+   To:
+       percent = ((max_val - value) / (max_val - min_val)) * 100
+
+SPI CONFIGURATION
+----------------
+If you need to change the SPI bus or device:
+- spi.open(0, 0) connects to SPI bus 0, device 0 (CE0)
+- spi.open(0, 1) connects to SPI bus 0, device 1 (CE1)
+
+CHANNEL CONFIGURATION
+-------------------
+To change which MCP3008 channel a sensor uses, modify the channel variable:
+- RAIN_CHANNEL = 0  # Change to any value 0-7
+- MOISTURE_CHANNEL = 0  # Change to any value 0-7
+- LDR_CHANNEL = 0  # Change to any value 0-7
+
+The MCP3008 has 8 analog input channels (0-7).
