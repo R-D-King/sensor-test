@@ -94,11 +94,13 @@ def readBmp180(addr=DEVICE):
     return (temperature, pressure, altitude)
 
 # Test the sensor
-if __name__ == "__main__":
-    chip_id, chip_version = readBmp180Id()
-    print(f"Chip ID: {chip_id}, Version: {chip_version}")
+while True:
+    if __name__ == "__main__":
+        chip_id, chip_version = readBmp180Id()
+        print(f"Chip ID: {chip_id}, Version: {chip_version}")
 
-    temperature, pressure, altitude = readBmp180()
-    print(f"Temperature: {temperature} °C")
-    print(f"Pressure: {pressure} hPa")
-    print(f"Altitude: {altitude} m")
+        temperature, pressure, altitude = readBmp180()
+        print(f"Temperature: {temperature} °C")
+        print(f"Pressure: {pressure} hPa")
+        print(f"Altitude: {altitude} m")
+        time.sleep(1)

@@ -2,7 +2,7 @@ import RPi.GPIO as GPIO  # Installation: See README.md for proper installation i
 import time
 
 # Define the GPIO pin connected to D0 output of LDR sensor
-LDR_PIN = 17
+LDR_PIN = 4
 
 # Setup GPIO numbering mode
 GPIO.setmode(GPIO.BCM)

@@ -2,7 +2,7 @@ import RPi.GPIO as GPIO  # Installation: See README.md for proper installation i
 import time
 
 # تعريف رقم البن الذي سيتم توصيل LED عليه
-LED_PIN = 17
+LED_PIN = 4
 # وقت التشغيل والإيقاف بالثواني
 ON_TIME = 5
 OFF_TIME = 5
