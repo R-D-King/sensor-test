@@ -10,8 +10,8 @@ spi.max_speed_hz = 1000000  # 1MHz
 MOISTURE_CHANNEL = 0  # Default to channel 0, can be changed as needed
 
 # Calibration values
-DRY_VALUE = 900  # Value when sensor is in dry air
-WET_VALUE = 400  # Value when sensor is in water
+DRY_VALUE = 930  # Value when sensor is in dry air
+WET_VALUE = 415  # Value when sensor is in water
 
 def read_adc(channel):
     """Read the analog value from the MCP3008 ADC"""
