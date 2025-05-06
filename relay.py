@@ -2,7 +2,7 @@ import RPi.GPIO as GPIO  # Installation: See README.md for proper installation i
 from time import sleep
 
 # Configuration
-relay_pin = 17  # Replace with your GPIO pin number
+relay_pin = 18  # Replace with your GPIO pin number
 on_time = 1     # Time in seconds to keep relay ON
 off_time = 1    # Time in seconds to keep relay OFF
 
