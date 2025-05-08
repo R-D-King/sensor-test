@@ -1,7 +1,10 @@
-import smbus
+import smbus  # Installation: See README.md for proper installation instructions
 import time
 from ctypes import c_short
+import signal
+import sys
 
+# Configuration
 DEVICE = 0x77  # I2C address of BMP180 sensor
 bus = smbus.SMBus(1)  # Use I2C bus 1 on Raspberry Pi
 
@@ -93,14 +96,40 @@ def readBmp180(addr=DEVICE):
 
     return (temperature, pressure, altitude)
 
-# Test the sensor
-while True:
-    if __name__ == "__main__":
+# Function to handle clean exit
+def signal_handler(sig, frame):
+    print("\nProgram terminated.")
+    sys.exit(0)
+
+# Register signal handler for clean exit
+signal.signal(signal.SIGINT, signal_handler)
+
+# Main function
+def main():
+    print("BMP180 Sensor Monitoring Started")
+    print("Press CTRL+C to exit")
+    print("----------------------------------------")
+    
+    try:
+        # Read and display chip ID and version
         chip_id, chip_version = readBmp180Id()
         print(f"Chip ID: {chip_id}, Version: {chip_version}")
+        
+        # Main loop
+        while True:
+            try:
+                temperature, pressure, altitude = readBmp180()
+                print(f"Temperature: {temperature:.1f} °C")
+                print(f"Pressure: {pressure:.1f} hPa")
+                print(f"Altitude: {altitude:.1f} m")
+                print("----------------------------------------")
+            except OSError as e:
+                print(f"Error reading sensor: {e}")
+                
+            time.sleep(1)
+    except Exception as e:
+        print(f"An error occurred: {e}")
 
-        temperature, pressure, altitude = readBmp180()
-        print(f"Temperature: {temperature} °C")
-        print(f"Pressure: {pressure} hPa")
-        print(f"Altitude: {altitude} m")
-        time.sleep(1)
+# Run the main function if this script is executed directly
+if __name__ == "__main__":
+    main()
