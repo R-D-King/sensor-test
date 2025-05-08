@@ -7,7 +7,7 @@ spi.open(0, 0)  # Open SPI bus 0, device 0
 spi.max_speed_hz = 1000000  # Set SPI speed to 1MHz
 
 # Define the channel for the rain sensor
-RAIN_CHANNEL = 1  # Default to channel 0, can be changed as needed
+RAIN_CHANNEL = 2  # Default to channel 0, can be changed as needed
 
 # Calibration values for the rain sensor
 DRY_VALUE = 1023   # Value when sensor is completely dry

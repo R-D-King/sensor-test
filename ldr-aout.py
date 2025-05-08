@@ -7,7 +7,7 @@ spi.open(0, 0)  # Open SPI bus 0, device 0
 spi.max_speed_hz = 1000000  # Set SPI speed to 1MHz
 
 # Define the channel for the LDR sensor
-LDR_CHANNEL = 0  # Default to channel 0, can be changed as needed
+LDR_CHANNEL = 1  # Default to channel 0, can be changed as needed
 
 def read_channel(channel):
     # Read analog data from MCP3008 ADC
@@ -26,7 +26,7 @@ def read_channel(channel):
 def convert_to_percent(value, min_val, max_val):
     # Convert raw ADC value to percentage based on calibration range
     # Formula: ((current - min) / (max - min)) * 100
-    percent = ((value - min_val) / (max_val - min_val)) * 100
+    percent = ((max_val - value) / (max_val - min_val)) * 100
     return max(0, min(100, percent))  # Clamp values to 0-100% range
 
 # Calibration values for the LDR sensor

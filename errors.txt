@@ -1,0 +1,28 @@
+(testing-venv) pi@pi:~/Documents/sensor-test $ python3 16x2.py 
+/home/pi/Documents/sensor-test/testing-venv/lib/python3.11/site-packages/RPLCD/gpio.py:164: RuntimeWarning: This channel is already in use, continuing anyway.  Use GPIO.setwarnings(False) to disable warnings.
+  GPIO.setup(pin, GPIO.OUT)
+(testing-venv) pi@pi:~/Documents/sensor-test $ 
+
+
+
+
+(testing-venv) pi@pi:~/Documents/sensor-test $ python3 bmp180.py 
+Chip ID: 85, Version: 2
+Temperature: 27.8 °C
+Pressure: 1009.58 hPa
+Altitude: 30.6 m
+Chip ID: 85, Version: 2
+Temperature: 27.8 °C
+Pressure: 1009.67 hPa
+Altitude: 29.85 m
+Chip ID: 85, Version: 2
+Temperature: 27.8 °C
+Pressure: 1009.65 hPa
+Altitude: 30.01 m
+^CTraceback (most recent call last):
+  File "/home/pi/Documents/sensor-test/bmp180.py", line 106, in <module>
+    time.sleep(1)
+KeyboardInterrupt
+
+(testing-venv) pi@pi:~/Documents/sensor-test $ 
+

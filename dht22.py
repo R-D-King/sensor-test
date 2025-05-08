@@ -5,7 +5,7 @@ import signal
 import sys
 
 # Define sensor type and pin (using BCM pin numbering)
-DHT_PIN = 4
+DHT_PIN = 26
 dht_sensor = adafruit_dht.DHT22(getattr(board, f"D{DHT_PIN}"))
 
 # Function to handle clean exit
