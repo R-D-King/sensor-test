@@ -28,6 +28,9 @@ source testing-venv/bin/activate
 
 # Install from requirements.txt
 pip install -r requirements.txt
+
+# Or in your virtual environment:
+python -m pip install -r requirements.txt
 ```
 
 ## Usage
