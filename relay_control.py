@@ -52,11 +52,11 @@ try:
         
         # Interpret the moisture level
         if moisture < 30:
-            print("Status: DRY - Watering needed")
             GPIO.output(relay_pin, GPIO.HIGH)
+            print("Pump ON")
         elif moisture > 80:
-            print("Status: MOIST - Adequate moisture")
             GPIO.output(relay_pin, GPIO.LOW)
+            print("Pump OFF")
 
         
         print("----------------------------------------")
