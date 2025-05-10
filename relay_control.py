@@ -71,3 +71,8 @@ finally:
     print("SPI connection closed.")
     GPIO.cleanup()
     print("GPIO cleaned up")
+    GPIO.output(relay_pin, GPIO.LOW)
+    print("Pump Turned OFF")
+    print("Application Closed")
+
+
