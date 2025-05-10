@@ -40,6 +40,8 @@ try:
     print("Soil Moisture Sensor Test Started (Press CTRL+C to exit)")
     print("----------------------------------------")
     print(f"Using MCP3008 channel: {MOISTURE_CHANNEL}")
+    print("Pump Turns on when Soil Moisture < 40%")
+    print("And Turns off when Soil Moisture > 80%")
     print("----------------------------------------")
     
     while True:
@@ -51,14 +53,13 @@ try:
         print(f"Raw Value: {raw_value} | Moisture: {moisture:.1f}% | Channel: {MOISTURE_CHANNEL}")
         
         # Interpret the moisture level
-        if moisture < 30:
+        if moisture < 40:
             GPIO.output(relay_pin, GPIO.HIGH)
             print("Pump ON")
-
         elif moisture > 80:
             GPIO.output(relay_pin, GPIO.LOW)
             print("Pump OFF")
-            
+
         
         print("----------------------------------------")
         time.sleep(2)
@@ -72,3 +73,7 @@ finally:
     print("SPI connection closed.")
     GPIO.cleanup()
     print("GPIO cleaned up")
+    GPIO.output(relay_pin, GPIO.LOW)
+    print("Pump Turned OFF")
+    print("Application Closed")
+
