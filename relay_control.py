@@ -22,7 +22,7 @@ spi.max_speed_hz = 1000000  # 1MHz
 MOISTURE_CHANNEL = 0  # Default to channel 0, can be changed as needed
 
 # Calibration values
-DRY_VALUE = 930  # Value when sensor is in dry air
+DRY_VALUE = 515  # Value when sensor is in dry air
 WET_VALUE = 415  # Value when sensor is in water
 
 def read_adc(channel):
